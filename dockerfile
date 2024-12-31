@@ -1,10 +1,27 @@
-#
-# NOTE: THIS DOCKERFILE IS GENERATED VIA "apply-templates.sh"
-#
-# PLEASE DO NOT EDIT IT DIRECTLY.
-#
-
+# TROCAR PARA A OPENJDK
 FROM eclipse-temurin:21-jdk-noble
+
+
+
+
+# ===============  INICIO SOBE O SERVER  =================================================================== #
+RUN mkdir /opt/backend && chmod 777 /opt/backend
+COPY server/target /opt/backend
+RUN cd /opt/backend && ls
+CMD ["java", "-jar", "server.jar"]
+
+# ===============  FIM SOBE O SERVER  =================================================================== #
+
+
+
+
+
+
+
+
+
+
+# ===============  INICIO CONFIG TOMCAT  =================================================================== #
 
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
@@ -146,4 +163,20 @@ EXPOSE 8080
 # upstream eclipse-temurin-provided entrypoint script caused https://github.com/docker-library/tomcat/issues/77 to come back as https://github.com/docker-library/tomcat/issues/302; use "/entrypoint.sh" at your own risk
 ENTRYPOINT []
 
-CMD ["catalina.sh", "run"]
+
+# Copiar as configurações do Tomcat
+COPY tomcat/bin $CATALINA_HOME/bin
+COPY tomcat/conf $CATALINA_HOME/conf
+
+# fazer o deploy do WAR
+COPY web/target $CATALINA_HOME/webapps
+
+# Permissões adequadas
+RUN chmod -R +rX $CATALINA_HOME
+
+
+#subir o  tomcat
+ CMD ["catalina.sh", "run"]
+
+
+ # ===============  FIM CONFIG TOMCAT =================================================================== #
