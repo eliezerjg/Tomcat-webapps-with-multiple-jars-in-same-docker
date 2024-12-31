@@ -1,10 +1,10 @@
-# Rode o tomcat e multiplos jars com o mesmo dockerfile
-#### Estrategia de migracao em partes para containerizacao
+# Run multiple jars and tomcat in the same dockerfile
+#### Mixed strategy to migrate 
 
 
 <br/>
 
 ## SupervisorD
-### aplicacao mista usando supervisorD para ter 2 instancias de app no mesmo docker
+### application for building services just with a text config file
 
 https://supervisord.org/introduction.html
