@@ -1,4 +1,5 @@
 # Rode o tomcat e multiplos jars com o mesmo dockerfile
+#### Estrategia de migracao em partes para containerizacao
 
 
 <br/>
