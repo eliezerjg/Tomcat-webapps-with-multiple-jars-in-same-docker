@@ -1,5 +1,5 @@
 # Run multiple jars and tomcat in the same dockerfile
-#### Mixed strategy to migrate 
+#### Have separed services isnt always the best solution, so here is a strategy to slowly migrating services, by starting, like from linux pure services to 1 dockerfile solution  
 
 
 <br/>
